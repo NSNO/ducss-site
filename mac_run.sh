@@ -17,6 +17,8 @@ if [ ! -d "../virtualenvs/$VENV_NAME" ]; then
 		brew update
 	fi
 
+	# needs sudo for this to run.
+	#which -s pip || easy_install pip
 	which -s mysql || brew install mysql
 
 	#
@@ -25,10 +27,15 @@ if [ ! -d "../virtualenvs/$VENV_NAME" ]; then
 	which -s git || brew install git
 
 	which -s python || brew install python --with-brewed-openssl
+
+	# Needs to escalate to sudo to install virtualenv
 	which -s virtualenv || pip install virtualenv
 
 	#Setting up virtualenv
-	mkdir "../virtualenvs"
+	if [ ! -d "../virtualenvs" ]; then
+		mkdir "../virtualenvs"
+	fi
+
 	virtualenv --no-site-packages "../virtualenvs/$VENV_NAME"
 
 	source "../virtualenvs/$VENV_NAME/bin/activate"
