@@ -25,7 +25,7 @@ if [ ! -d "../virtualenvs/$VENV_NAME" ]; then
 	which -s git || brew install git
 
 	which -s python || brew install python --with-brewed-openssl
-	which -s virtualenv || pip install virtualenv
+	which -s virtualenv || pip install virtualenv || easy_install virtualenv
 
 	#Setting up virtualenv
 	mkdir "../virtualenvs"
